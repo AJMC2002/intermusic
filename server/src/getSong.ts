@@ -1,5 +1,6 @@
-import { load, CheerioAPI, Element } from "cheerio";
-import { Song } from "../types";
+import { load } from "cheerio";
+import type { CheerioAPI, Element } from "cheerio";
+import type { Song } from "./types";
 import { config } from "dotenv";
 
 config({

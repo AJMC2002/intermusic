@@ -1,9 +1,10 @@
-import express, { Express, Request, Response } from "express";
+import express from "express";
+import type { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 import getSong from "./getSong";
-import { Song } from "../types";
+import type { Song } from "./types";
 import { config } from "dotenv";
 
 config({
