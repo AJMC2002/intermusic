@@ -8,48 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLyrics = exports.getSong = void 0;
-const dotenv_1 = __importDefault(require("dotenv"));
-const cheerio_1 = __importDefault(require("cheerio"));
-dotenv_1.default.config({
-    path: ".env",
+exports.getSong = void 0;
+const cheerio_1 = require("cheerio");
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)({
+    path: ".env.local",
 });
-const getSong = function (songID) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const res = yield fetch(`${process.env.API_URL}/songs/${songID}`, {
-            method: "GET",
-            headers: new Headers({
-                Authorization: `Bearer ${process.env.CLIENT_ACCESS_TOKEN}`,
-            }),
-        });
-        if (res.ok) {
-            const json = yield res.json();
-            const song = json.response.song;
-            const lyrics = yield (0, exports.getLyrics)(`${process.env.GENIUS_URL}${song.path}`);
-            return {
-                id: songID,
-                language: song.language,
-                release_date: song.release_date,
-                song_art_image_thumbnail_url: song.song_art_image_thumbnail_url,
-                title: song.title,
-                artist_names: song.artist_names,
-                media: song.media,
-                lyrics: lyrics,
-            };
-        }
-        return null;
-    });
-};
-exports.getSong = getSong;
 const getLyrics = function (url) {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield fetch(url);
         const html = yield res.text();
-        const $ = cheerio_1.default.load(html);
+        const $ = (0, cheerio_1.load)(html);
         let lyrics = $('div[class="lyrics"]').text().trim();
         if (!lyrics) {
             lyrics = "";
@@ -64,9 +34,44 @@ const getLyrics = function (url) {
                 }
             });
         }
-        if (!lyrics)
-            return null;
         return lyrics.trim();
     });
 };
-exports.getLyrics = getLyrics;
+const EMPTY_SONG = {
+    id: 0,
+    language: "",
+    release_date: "",
+    song_art_image_thumbnail_url: "",
+    title: "",
+    artist_names: "",
+    media: "",
+    lyrics: "",
+};
+const getSong = function (songID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch(`${process.env.API_URL}/songs/${songID}`, {
+            method: "GET",
+            headers: new Headers({
+                Authorization: `Bearer ${process.env.CLIENT_ACCESS_TOKEN}`,
+            }),
+        });
+        if (res.ok) {
+            const json = yield res.json();
+            const song = json.response.song;
+            const lyrics = yield getLyrics(`${process.env.GENIUS_URL}${song.path}`);
+            return {
+                id: songID,
+                language: song.language,
+                release_date: song.release_date,
+                song_art_image_thumbnail_url: song.song_art_image_thumbnail_url,
+                title: song.title,
+                artist_names: song.artist_names,
+                media: song.media,
+                lyrics: lyrics,
+            };
+        }
+        return EMPTY_SONG;
+    });
+};
+exports.getSong = getSong;
+exports.default = exports.getSong;

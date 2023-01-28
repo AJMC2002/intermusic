@@ -1,19 +1,27 @@
-import express, { Express, Request, Response } from 'express';
-import bodyParser from "body-parser"
-import cors from "cors"
-import morgan from "morgan"
-import {getLyrics} from "./functions"
+import express, { Express, Request, Response } from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import morgan from "morgan";
+import getSong from "./getSong";
+import { Song } from "../types";
+import { config } from "dotenv";
 
-const app:Express = express()
+config({
+	path: ".env.local",
+});
+
+const app: Express = express()
 	.use(bodyParser.json())
 	.use(cors())
 	.use(morgan("combined"));
 
-const port = process.env.PORT || 8081;
+const port: string = process.env.PORT || "8081";
 
-app.get("/genius", async (req:Request, res:Response) => {
-	const lyrics: string|null = await getLyrics("https://genius.com/Almendra-fermin-lyrics");
-	res.send({ lyrics: lyrics });
+app.get("/api/:songID", async (req: Request, res: Response) => {
+	const songID = Number(req.params.songID);
+	getSong(songID).then((song: Song | null) => {
+		res.send(song);
+	});
 });
 
 app.listen(port, () => {
