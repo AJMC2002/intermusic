@@ -1,10 +1,7 @@
-export interface Song {
-	id: number;
-	language: string;
-	release_date: string;
-	song_art_image_thumbnail_url: string;
-	title: string;
-	artist_names: string;
-	media: string;
-	lyrics: string;
-}
+import { Album, Artist, Song } from "../../server/src/types";
+
+export type Artist = Artist;
+
+export type Album = Album;
+
+export type Song = Song;

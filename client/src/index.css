@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 /* Utils */
-[v-cloak] {
-	display: none;
-}
-
 .animated-150 {
 	@apply transition-all ease-in duration-150;
 }
@@ -35,7 +31,7 @@
 .navbar {
 	@apply black-bg shadow-md
     sticky top-0 left-0 z-50
-	w-screen px-10 py-6 
+	w-screen px-14 py-6 
     flex flex-row items-center justify-between;
 }
 

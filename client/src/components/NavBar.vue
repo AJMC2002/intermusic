@@ -4,7 +4,7 @@
 		<router-link to="/about" class="title">Pitooo</router-link>
 		<div class="searchbar group">
 			<font-awesome-icon
-				icon="fa-solid fa-xmark"
+				icon="xmark"
 				class="clear-input-btn"
 				@click="delSearch"
 			/>

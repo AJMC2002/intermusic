@@ -1,5 +1,5 @@
 <template>
-	<div class="font-mono text-l px-10">
+	<div class="font-mono text-l px-14">
 		<SongCard v-for="idx in ids" :key="idx" :songID="idx"></SongCard>
 	</div>
 </template>
