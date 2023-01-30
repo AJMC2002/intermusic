@@ -8,45 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSong = void 0;
-const cheerio_1 = require("cheerio");
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)({
-    path: ".env.local",
-});
-const getLyrics = function (url) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const res = yield fetch(url);
-        const html = yield res.text();
-        const $ = (0, cheerio_1.load)(html);
-        let lyrics = $('div[class="lyrics"]').text().trim();
-        if (!lyrics) {
-            lyrics = "";
-            $('div[class^="Lyrics__Container"]').each((i, elem) => {
-                var _a;
-                if ($(elem).text().length !== 0) {
-                    const snippet = (_a = $(elem)
-                        .html()) === null || _a === void 0 ? void 0 : _a.replace(/<br>/g, "\n").replace(/<(?!\s*br\s*\/?)[^>]+>/gi, "");
-                    if (snippet !== undefined) {
-                        lyrics += $("<textarea/>").html(snippet).text().trim() + "\n\n";
-                    }
-                }
-            });
-        }
-        return lyrics.trim();
-    });
-};
-const EMPTY_SONG = {
-    id: 0,
-    language: "",
-    release_date: "",
-    song_art_image_thumbnail_url: "",
-    title: "",
-    artist_names: "",
-    media: "",
-    lyrics: "",
-};
+const formatGeniusSong_1 = __importDefault(require("./utils/formatGeniusSong"));
 const getSong = function (songID) {
     return __awaiter(this, void 0, void 0, function* () {
         const res = yield fetch(`${process.env.API_URL}/songs/${songID}`, {
@@ -56,21 +23,10 @@ const getSong = function (songID) {
             }),
         });
         if (res.ok) {
-            const json = yield res.json();
-            const song = json.response.song;
-            const lyrics = yield getLyrics(`${process.env.GENIUS_URL}${song.path}`);
-            return {
-                id: songID,
-                language: song.language,
-                release_date: song.release_date,
-                song_art_image_thumbnail_url: song.song_art_image_thumbnail_url,
-                title: song.title,
-                artist_names: song.artist_names,
-                media: song.media,
-                lyrics: lyrics,
-            };
+            const data = yield res.json();
+            return (0, formatGeniusSong_1.default)(data.response.song);
         }
-        return EMPTY_SONG;
+        return null;
     });
 };
 exports.getSong = getSong;

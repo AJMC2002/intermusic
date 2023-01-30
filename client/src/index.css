@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Utils */
+[v-cloak] {
+	display: none;
+}
+
+.animated-150 {
+	@apply transition-all ease-in duration-150;
+}
+
+.btn {
+	@apply w-12 h-12 cursor-pointer;
+}
+
+.small-btn {
+	@apply w-8 h-8 cursor-pointer;
+}
+
+.ease-in-btn {
+	@apply scale-0 group-focus-within:scale-100 animated-150;
+}
+
+.white-bg {
+	@apply bg-white text-black;
+}
+
+.black-bg {
+	@apply bg-black text-white;
+}
+
+/* Nav Bar Style */
+.navbar {
+	@apply black-bg shadow-md
+    sticky top-0 left-0 z-50
+	w-screen px-10 py-6 
+    flex flex-row items-center justify-between;
+}
+
+.title {
+	@apply text-2xl;
+}
+
+.searchbar {
+	@apply flex flex-row items-center;
+}
+
+.clear-input-btn {
+	@apply small-btn mr-2 ease-in-btn;
+}
+
+.submit-input-btn {
+	@apply btn rounded-r-lg border-slate-400 border-none border-2 hover:border-solid;
+}
+
+input[type="text"] {
+	@apply white-bg w-56 md:w-96 h-12 p-3 rounded-l-lg;
+}

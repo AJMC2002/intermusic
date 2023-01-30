@@ -28,9 +28,8 @@ const app = (0, express_1.default)()
 const port = process.env.PORT || "8081";
 app.get("/api/:songID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const songID = Number(req.params.songID);
-    (0, getSong_1.default)(songID).then((song) => {
-        res.send(song);
-    });
+    const song = yield (0, getSong_1.default)(songID);
+    res.send(song);
 }));
 app.listen(port, () => {
     console.log(`🀄 [server]: Server is running at http://localhost:${port}`);
