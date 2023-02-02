@@ -1,6 +1,6 @@
 import { CheerioAPI, Element, load } from "cheerio";
 
-export const getLyrics = async function (url: string): Promise<string> {
+const getLyrics = async function (url: string): Promise<string> {
 	const res: Response = await fetch(url);
 	const html: string = await res.text();
 	const $: CheerioAPI = load(html);
@@ -12,6 +12,8 @@ export const getLyrics = async function (url: string): Promise<string> {
 				const snippet: string | undefined = $(elem)
 					.html()
 					?.replace(/<br>/g, "\n")
+					.replace(/<div.*>.*<\/div>/gi, "\n")
+					.replace(/<inread-ad><\/inread-ad>/g, "\n")
 					.replace(/<(?!\s*br\s*\/?)[^>]+>/gi, "");
 				if (snippet !== undefined) {
 					lyrics += $("<textarea/>").html(snippet).text().trim() + "\n\n";
@@ -19,7 +21,7 @@ export const getLyrics = async function (url: string): Promise<string> {
 			}
 		});
 	}
-	return lyrics.trim();
+	return lyrics;
 };
 
 export default getLyrics;

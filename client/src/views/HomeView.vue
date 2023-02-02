@@ -1,21 +1,35 @@
 <template>
 	<div class="font-mono text-l px-14">
-		<SongCard v-for="idx in ids" :key="idx" :songID="idx"></SongCard>
+		<LoadingSpinner v-if="isLoading"></LoadingSpinner>
+		<SongCard
+			v-else
+			v-for="song in validSongs"
+			:key="song.id"
+			:song="song"
+		></SongCard>
 	</div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import NavBar from "@/components/NavBar.vue";
-import SongCard from "@/components/SongCard.vue";
+<script setup lang="ts">
+import { ref, computed, onBeforeMount } from "vue";
+import LoadingSpinner from "../../../client/src/components/LoadingSpinner.vue";
+import SongCard from "../../../client/src/components/SongCard.vue";
+import { useSongStore } from "../stores/song";
+import { Song } from "../../../client/src/types.js";
 
-@Options({
-	components: {
-		NavBar,
-		SongCard,
-	},
-})
-export default class HomeView extends Vue {
-	ids = [796266, 795987, 796152, 796286, 796354, 795963];
-}
+const store = useSongStore();
+const isLoading = ref(true);
+const search = ref("");
+
+const validSongs = computed<Song[]>(() => {
+	if (search.value) {
+		return store.songs.filter((song: Song) => song.name.includes(search.value));
+	}
+	return store.songs;
+});
+
+onBeforeMount(() => {
+	store.updateSongs();
+	isLoading.value = false;
+});
 </script>

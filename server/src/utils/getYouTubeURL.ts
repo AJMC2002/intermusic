@@ -1,6 +1,6 @@
 import { GeniusMedia } from "../types";
 
-export const getYouTubeURL = function (media: GeniusMedia[]): string | null {
+const getYouTubeURL = function (media: GeniusMedia[]): string | null {
 	const youtube_media: GeniusMedia | undefined = media.find((source) => {
 		return source.provider === "youtube";
 	});

@@ -1,6 +1,6 @@
 import { Artist, GeniusArtist } from "../types";
 
-export const formatGeniusArtist = function (artist: GeniusArtist): Artist {
+const formatGeniusArtist = function (artist: GeniusArtist): Artist {
 	return {
 		id: artist.id,
 		name: artist.name,

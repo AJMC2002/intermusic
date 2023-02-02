@@ -1,7 +1,7 @@
 <template>
 	<nav class="navbar">
 		<router-link to="/" class="title">MеждуMusic</router-link>
-		<router-link to="/about" class="title">Pitooo</router-link>
+		<router-link to="/song/796266" class="title">Pitooo</router-link>
 		<div class="searchbar group">
 			<font-awesome-icon
 				icon="xmark"
@@ -25,16 +25,15 @@
 	</nav>
 </template>
 
-<script lang="ts">
-import { Vue } from "vue-class-component";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default class NavBar extends Vue {
-	search = "pene";
-	delSearch(): void {
-		this.search = "";
-	}
-	onSubmit(): void {
-		console.log(this.search);
-	}
+const search = ref("pene");
+
+function delSearch(): void {
+	search.value = "";
+}
+function onSubmit(): void {
+	console.log(search);
 }
 </script>

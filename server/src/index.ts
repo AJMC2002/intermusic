@@ -7,7 +7,7 @@ import { Song } from "./types";
 import { config } from "dotenv";
 
 config({
-	path: ".env.local",
+	path: ".env",
 });
 
 const app: Express = express()

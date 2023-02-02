@@ -1,7 +1,7 @@
 import { Album, GeniusAlbum } from "../types";
 import formatGeniusArtist from "./formatGeniusArtist";
 
-export const formatGeniusAlbum = function (
+const formatGeniusAlbum = function (
 	album: GeniusAlbum | null
 ): Album | null {
 	if (album)

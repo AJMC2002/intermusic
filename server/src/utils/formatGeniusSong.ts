@@ -5,7 +5,7 @@ import formatGeniusArtistArray from "./formatGeniusArtistArray";
 import getLyrics from "./getLyrics";
 import getYouTubeURL from "./getYouTubeURL";
 
-export const formatGeniusSong = async function (
+const formatGeniusSong = async function (
 	song: GeniusSong
 ): Promise<Song> {
 	return {
