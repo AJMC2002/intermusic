@@ -1,7 +1,10 @@
 <template>
 	<LoadingSpinner v-if="!store.songs.length"></LoadingSpinner>
 	<div v-else id="home">
-		<h1 v-if="!validSongs.length" class="text-black">Hvdas no disponibles</h1>
+		<div v-if="!validSongs.length" class="flexbox-c text-black">
+			<h1>Здесь никого нет...</h1>
+			<img src="@/assets/images/Octavia.gif" alt="" class="w-52 h-52" />
+		</div>
 		<SongCard
 			v-else
 			v-for="song in validSongs"
