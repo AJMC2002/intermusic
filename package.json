@@ -1,0 +1,26 @@
+{
+	"name": "intermusic",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"server": "npm start --prefix server",
+		"server:dev": "npm run dev --prefix server",
+		"client": "npm run serve --prefix client",
+		"dev": "concurrently \"npm run server:dev\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AJMC2002/intermusic.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/AJMC2002/intermusic/issues"
+	},
+	"homepage": "https://github.com/AJMC2002/intermusic#readme",
+	"devDependencies": {
+		"concurrently": "^7.6.0"
+	}
+}

@@ -1,25 +1,25 @@
 <template>
-	<nav class="navbar">
-		<router-link to="/" class="title">MеждуMusic</router-link>
-		<router-link to="/song/796266" class="title">Pitooo</router-link>
-		<div class="searchbar group">
-			<font-awesome-icon
-				icon="xmark"
-				class="clear-input-btn"
-				@click="delSearch"
-			/>
+	<nav>
+		<router-link to="/">
+			<div id="logo">
+				<img src="@/assets/Luna.gif" alt="" class="h-16 -scale-x-100" />
+				MеждуMusic
+			</div>
+		</router-link>
+		<div id="searchbar" class="group">
+			<font-awesome-icon id="clear-input-btn" icon="xmark" @click="delSearch" />
 			<input
 				type="text"
 				maxlength="100"
-				placeholder="Enter your search here"
-				@keydown.enter="onSubmit"
 				v-model="search"
+				placeholder="Enter your search here"
+				@keyup.enter="onSubmit"
 			/>
 			<img
+				id="submit-input-btn"
 				src="../assets/cat.jpg"
 				alt=""
 				@click="onSubmit"
-				class="submit-input-btn"
 			/>
 		</div>
 	</nav>
@@ -27,13 +27,25 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import useEventBus from "@/eventBus";
 
-const search = ref("pene");
+const router = useRouter();
+const { emit } = useEventBus();
+
+const search = ref("");
 
 function delSearch(): void {
 	search.value = "";
+	onSubmit();
 }
+
 function onSubmit(): void {
-	console.log(search);
+	search.value = search.value.trim();
+	emit("search", search.value.toLocaleLowerCase());
+
+	if (router.currentRoute.value.path !== "/") {
+		router.push({ path: "/" });
+	}
 }
 </script>

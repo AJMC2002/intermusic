@@ -4,55 +4,137 @@
 
 @tailwind utilities;
 
-/* Utils */
-.animated-150 {
-	@apply transition-all ease-in duration-150;
+/* General */
+html,
+body,
+#app {
+	@apply w-full h-full font-mono text-lg;
 }
 
-.btn {
-	@apply w-12 h-12 cursor-pointer;
-}
-
-.small-btn {
-	@apply w-8 h-8 cursor-pointer;
-}
-
-.ease-in-btn {
-	@apply scale-0 group-focus-within:scale-100 animated-150;
-}
-
-.white-bg {
-	@apply bg-white text-black;
-}
-
-.black-bg {
-	@apply bg-black text-white;
-}
-
-/* Nav Bar Style */
-.navbar {
-	@apply black-bg shadow-md
-    sticky top-0 left-0 z-50
-	w-screen px-14 py-6 
-    flex flex-row items-center justify-between;
-}
-
-.title {
+h1 {
 	@apply text-2xl;
 }
 
-.searchbar {
-	@apply flex flex-row items-center;
-}
-
-.clear-input-btn {
-	@apply small-btn mr-2 ease-in-btn;
-}
-
-.submit-input-btn {
-	@apply btn rounded-r-lg border-slate-400 border-none border-2 hover:border-solid;
+h2 {
+	@apply text-xl;
 }
 
 input[type="text"] {
-	@apply white-bg w-56 md:w-96 h-12 p-3 rounded-l-lg;
+	@apply white-bg h-12 p-3 outline-none focus:ring-2 focus:ring-fuchsia-600;
+}
+
+nav {
+	@apply black-bg shadow-md
+    sticky top-0 left-0 z-50
+	w-full px-14 py-6 
+    flexbox-c gap-5
+	md:flexbox-r md:justify-between;
+}
+
+nav input {
+	@apply rounded-l-lg w-60 lg:w-96;
+}
+
+nav a {
+	@apply text-2xl;
+}
+
+/* Utils */
+@layer components {
+	.white-bg {
+		@apply bg-white text-black;
+	}
+
+	.black-bg {
+		@apply bg-black text-white;
+	}
+
+	.purple-bg {
+		@apply bg-purple-700 text-white;
+	}
+
+	.flexbox-r {
+		@apply flex flex-row items-center;
+	}
+
+	.flexbox-c {
+		@apply flex flex-col items-center;
+	}
+
+	.btn {
+		@apply w-12 h-12 cursor-pointer;
+	}
+
+	.small-btn {
+		@apply w-8 h-8 cursor-pointer;
+	}
+
+	.animated-150 {
+		@apply transition-all ease-in duration-150;
+	}
+
+	.ease-in-btn {
+		@apply scale-0 group-focus-within:scale-100 animated-150;
+	}
+
+	.loading-spinner {
+		@apply flexbox-r justify-center p-10;
+	}
+}
+
+/* Loading Spinner Style */
+#loading-spinner {
+	@apply m-5 flexbox-c flex-grow justify-center;
+}
+
+/* Nav Bar Style */
+#logo {
+	@apply flexbox-r gap-2;
+}
+
+#searchbar {
+	@apply flexbox-r;
+}
+
+#clear-input-btn {
+	@apply small-btn mr-2 ease-in-btn;
+}
+
+#submit-input-btn {
+	@apply btn rounded-r-lg border-purple-500
+	hover:ring-2 hover:ring-fuchsia-700;
+}
+
+/* SongCard Style */
+#song-card-bg {
+	@apply black-bg rounded-lg
+	relative my-6
+	before:bg-purple-700
+	before:absolute before:top-3 before:left-3 before:-z-10
+	before:w-full before:h-full before:rounded-lg
+	hover:purple-bg	hover:before:bg-black
+	animated-150;
+}
+
+#song-card {
+	@apply flexbox-r p-5 gap-5 cursor-pointer;
+}
+
+/* SongHeader Style */
+#song-header {
+	@apply relative w-full flexbox-r px-14 py-3 gap-5;
+}
+
+#song-header-info {
+	@apply black-bg w-full h-3/4 pl-80 pr-14 py-3 absolute top-0 left-0 -z-10 shadow-lg;
+}
+
+/* SongLyrics Style */
+#lyrics-bg {
+	@apply px-14 py-6;
+}
+
+/* Home Style */
+#home {
+	@apply px-14 py-10;
 }

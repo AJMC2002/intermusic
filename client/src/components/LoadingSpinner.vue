@@ -1,8 +1,8 @@
 <template>
-	<div class="flex items-center justify-center p-10">
-		<font-awesome-icon icon="spinner" class="w-12 h-12" pulse />
+	<div id="loading-spinner">
+		<img src="@/assets/RainbowLoading.gif" alt="" class="w-96 h-96" />
+		<h1 class="m-2">Loading...</h1>
 	</div>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

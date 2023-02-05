@@ -1,5 +1,5 @@
 <template>
-	<div class="px-14 py-6">
+	<div id="lyrics-bg">
 		<span class="whitespace-pre">
 			{{ lyrics }}
 		</span>

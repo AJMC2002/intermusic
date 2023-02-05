@@ -1,13 +1,11 @@
 <template>
-	<div
-		class="relative my-6 rounded-lg bg-black text-white before:-z-10 before:w-full before:h-full before:absolute before:top-3 before:left-3 before:rounded-lg before:bg-slate-600"
-	>
-		<div @click="redirect" class="p-5 gap-5 flex flex-row items-center">
+	<div id="song-card-bg">
+		<div @click="redirect" id="song-card">
 			<img :src="song.image_url" alt="" class="w-32 h-32" />
 			<div>
 				<h1>{{ song.name }}</h1>
-				<h3>{{ song.artist.name }}</h3>
-				<h3 v-if="song.featured_artists.length > 0">
+				<h2>{{ song.artist.name }}</h2>
+				<h3 v-if="song.featured_artists.length">
 					{{ `Ft. ${featuredArtists()}` }}
 				</h3>
 			</div>
@@ -16,15 +14,14 @@
 </template>
 
 <script setup lang="ts">
-import { Artist } from "@/types";
 import { useRouter } from "vue-router";
+import { Artist, Song } from "@/types";
 
-const props = defineProps({
-	song: {
-		type: Object,
-		required: true,
-	},
-});
+interface Props {
+	song: Song;
+}
+
+const props = defineProps<Props>();
 
 const router = useRouter();
 
