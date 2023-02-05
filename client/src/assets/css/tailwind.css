@@ -5,10 +5,17 @@
 @tailwind utilities;
 
 /* General */
-html,
+html {
+	@apply h-full font-mono text-lg antialiased;
+}
+
 body,
 #app {
-	@apply w-full h-full font-mono text-lg;
+	@apply w-full h-full min-h-full table;
+}
+
+footer {
+	@apply table-row purple-bg;
 }
 
 h1 {
@@ -37,6 +44,10 @@ nav input {
 
 nav a {
 	@apply text-2xl;
+}
+
+hr {
+	@apply w-1/2 border-2 border-white rounded-sm;
 }
 
 /* Utils */
@@ -84,7 +95,7 @@ nav a {
 
 /* Loading Spinner Style */
 #loading-spinner {
-	@apply m-5 flexbox-c flex-grow justify-center;
+	@apply m-20 flexbox-c flex-grow justify-center;
 }
 
 /* Nav Bar Style */
@@ -134,7 +145,29 @@ nav a {
 	@apply px-14 py-6;
 }
 
+/* Song About Style */
+#song-info {
+	@apply black-bg flexbox-c px-14 py-10 gap-5;
+}
+
+.info-section {
+	@apply w-full flex;
+}
+
+.info-subsection {
+	@apply w-1/2 flexbox-r justify-center px-10;
+}
+
 /* Home Style */
 #home {
 	@apply px-14 py-10;
+}
+
+/* Footer Style */
+#footer-container {
+	@apply px-14 py-3;
+}
+
+#logos {
+	@apply flex flex-row-reverse gap-3;
 }

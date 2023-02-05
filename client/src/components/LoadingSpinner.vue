@@ -1,8 +1,10 @@
 <template>
 	<div id="loading-spinner">
-		<img src="@/assets/RainbowLoading.gif" alt="" class="w-96 h-96" />
+		<img
+			src="@/assets/images/RainbowLoading.gif"
+			alt=""
+			class="w-72 h-72 sm:w-96 sm:h-96"
+		/>
 		<h1 class="m-2">Loading...</h1>
 	</div>
 </template>
-
-<script setup lang="ts"></script>

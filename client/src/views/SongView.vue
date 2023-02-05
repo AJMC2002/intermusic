@@ -3,6 +3,7 @@
 	<div v-else>
 		<SongHeader :song="song"></SongHeader>
 		<SongLyrics :lyrics="song?.lyrics"></SongLyrics>
+		<SongAbout :song="song"></SongAbout>
 	</div>
 </template>
 
@@ -12,6 +13,7 @@ import { useRoute } from "vue-router";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import SongHeader from "@/components/SongHeader.vue";
 import SongLyrics from "@/components/SongLyrics.vue";
+import SongAbout from "@/components/SongAbout.vue";
 import { useSongStore } from "@/stores/song";
 import { Song } from "@/types";
 

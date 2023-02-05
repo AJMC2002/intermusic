@@ -7,5 +7,9 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({ lyrics: String });
+interface Props {
+	lyrics: string;
+}
+
+defineProps<Props>();
 </script>

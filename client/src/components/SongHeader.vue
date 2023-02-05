@@ -6,6 +6,7 @@
 				<h1>{{ song.name }}</h1>
 				<h2>{{ song.artist.name }}</h2>
 				<h3 v-if="song.featured_artists.length">Ft. {{ featured_artists }}</h3>
+				<h5 class="text-right">{{ release_date }}</h5>
 			</div>
 		</div>
 	</div>
@@ -30,5 +31,15 @@ const featured_artists = computed(() => {
 	const start: string = artist_names.slice(0, -1).join(", ");
 	const end: string[] = artist_names.slice(-1);
 	return [start, end].join(artist_names.length <= 1 ? "" : " & ");
+});
+
+const release_date = computed(() => {
+	const [year, month, day] = props.song.release_date.split("-").map(Number);
+	const date = new Date(Date.UTC(year, month, day));
+	return date.toLocaleDateString("ru", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
 });
 </script>

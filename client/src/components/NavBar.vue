@@ -2,7 +2,7 @@
 	<nav>
 		<router-link to="/">
 			<div id="logo">
-				<img src="@/assets/Luna.gif" alt="" class="h-16 -scale-x-100" />
+				<img src="@/assets/images/Luna.gif" alt="" class="h-16 -scale-x-100" />
 				MеждуMusic
 			</div>
 		</router-link>
@@ -12,12 +12,12 @@
 				type="text"
 				maxlength="100"
 				v-model="search"
-				placeholder="Enter your search here"
+				placeholder="Введите поиск здесь"
 				@keyup.enter="onSubmit"
 			/>
 			<img
 				id="submit-input-btn"
-				src="../assets/cat.jpg"
+				src="@/assets/images/cat.jpg"
 				alt=""
 				@click="onSubmit"
 			/>
