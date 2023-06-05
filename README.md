@@ -1,5 +1,5 @@
 # intermusic
-Website with some music from around the world. Made using Vue with Typescript.
+Website with some music lyrics of songs from around the world. Made using Vue with Typescript.
 
 # Usage
 
